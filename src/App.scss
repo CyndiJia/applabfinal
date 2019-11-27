@@ -1,4 +1,4 @@
-
+@import "~video-react/styles/scss/video-react"; 
 .App {
   text-align: center;
 }
@@ -20,4 +20,15 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.video-react .video-react-big-play-button {
+  top:48%;
+  left:45%;
+}
+
+.video-react.video-react-fluid{
+  width:100%;
+  // left:5%;
+  margin-top: 30%;
 }

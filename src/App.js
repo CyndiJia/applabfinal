@@ -1,9 +1,10 @@
 import React from 'react';
 import Speech from 'react-speech';
 import { Player } from 'video-react';
+// import "node_modules/video-react/dist/video-react.css"; 
 //import logo from './logo.svg';
-// import '~video-react/dist/video-react.css'; 
-import './App.css';
+
+import './App.scss';
 
 
 function App() {
