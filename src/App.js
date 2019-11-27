@@ -1,16 +1,23 @@
 import React from 'react';
 import Speech from 'react-speech';
 import { Player } from 'video-react';
+
 // import "node_modules/video-react/dist/video-react.css"; 
 //import logo from './logo.svg';
 
 import './App.scss';
+import Dictaphone from './dictaphone.js'
+
+
+
+
 
 
 function App() {
   return (
     
     <div className="App">
+      <Dictaphone></Dictaphone>
       <Speech
           text="Pat pat, Yiqi"
           pitch="0.8"
