@@ -29,6 +29,42 @@
 
 .video-react.video-react-fluid{
   width:100%;
-  // left:5%;
   margin-top: 30%;
+}
+
+.entry{
+  width:100%;
+  height:100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  flex-wrap:wrap;
+  justify-content: space-between;
+}
+
+#intro{
+  color:white;
+  font-size: 30px;
+  margin-top: 20%;
+  flex:2;
+}
+
+
+#intro2{
+  color:white;
+  font-size: 30px;
+  flex: 2;
+}
+
+#button{
+  background-color:lightgreen;
+  width:100px;
+  height:50px;
+  margin-left:45%;
+  margin-bottom: 20%;
+  flex:0.1;
+}
+
+.voice{
+  margin-bottom: 20%;
 }
