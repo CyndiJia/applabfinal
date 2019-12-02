@@ -1,7 +1,6 @@
 import React from 'react';
-import Speech from 'react-speech';
 import { Player } from 'video-react';
-import { BrowserRouter as Router, Route, Link,Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import { useState } from "react";
 import { useSpeechRecognition } from "react-speech-kit";
 import { ReactMic } from 'react-mic';
@@ -47,8 +46,8 @@ function Intro() {
     }
   });
   const [stress, setStress] = useState(false);
-  if (stress){
-    return <Redirect to ='/Choose'/>
+  if (stress) {
+    return <Redirect to='/Choose' />
   }
 
   return (
@@ -56,14 +55,6 @@ function Intro() {
       <div className="text">
         <p id="intro">If you feel stressful, don't box yourself to the corner : )</p>
         <p id="intro2">Saying it out could help!</p>
-        {/* <Speech
-          text="If you feel stressful, don't box yourself to the corner.Saying it out could help!"
-          pitch="0.8"
-          rate="1"
-          volume="1"
-          lang="en-GB"
-          voice="Google UK English Female"
-        /> */}
       </div>
 
       <div className="voice">
@@ -100,9 +91,9 @@ function Choose() {
 
   return (
     // <div className="choosewhole">
-     
-      <div className="choose">
-            <Particles className="par" height="800"
+
+    <div className="choose">
+      <Particles className="par" height="800"
         params={{
           "particles": {
             "number": {
@@ -148,19 +139,19 @@ function Choose() {
                 "opacity": 0.2
               },
               "repulse": {
-                "distance": 400,
+                "distance": 300,
                 "duration": 4
               }
             }
           }
         }} />
-        <div className="choosetext">
-          <p id="ccintro">Do you wanna</p>
-          {/* particle system   the higher the volume the bigger the ball, finally explodes and disappear*/}
-          <p id="choice2">Shout out worries</p>
-          <p id="choice1">Watch a relaxing video</p>
+      <div className="choosetext">
+        <p id="ccintro">Do you wanna</p>
+        {/* particle system   the higher the volume the bigger the ball, finally explodes and disappear*/}
+        <p id="choice2">Shout out worries</p>
+        <p id="choice1">Watch a relaxing video</p>
 
-          {/* <Speech
+        {/* <Speech
           text="If you feel stressful, don't box yourself to the corner.Saying it out could help!"
           pitch="0.8"
           rate="1"
@@ -168,26 +159,26 @@ function Choose() {
           lang="en-GB"
           voice="Google UK English Female"
         /> */}
-        </div>
-
-        <div className="voice2">
-          <button onMouseDown={listen} onMouseUp={stop}>
-            Click to say it out
-      </button>
-          <textarea
-            value={value}
-            onChange={event => setValue(event.target.value)}
-          />
-          {/* <Link to="/Choose">{stress}</Link> */}
-          < div id="button2">
-            <Link to="/Story"><p>Shout</p></Link>
-            <Link to="/FunnyVideo"><p>Video</p></Link>
-          </div>
-
-          {listening && <div className="lis">Go ahead I'm listening</div>}
-        </div>
-     
       </div>
+
+      <div className="voice2">
+        <button onMouseDown={listen} onMouseUp={stop}>
+          Click to say it out
+      </button>
+        <textarea
+          value={value}
+          onChange={event => setValue(event.target.value)}
+        />
+        {/* <Link to="/Choose">{stress}</Link> */}
+        < div id="button2">
+          <Link to="/Story"><p>Shout</p></Link>
+          <Link to="/FunnyVideo"><p>Video</p></Link>
+        </div>
+
+        {listening && <div className="lis">Go ahead I'm listening</div>}
+      </div>
+
+    </div>
     // </div>
 
   );
@@ -215,7 +206,7 @@ function Story() {
         className="sound-wave"
         onData={onData}
       />
-      <Circle r={radius} fill={{ color: 'black' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
+      <Circle id="cirrr" r={radius} fill={{ color: 'black' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
       <button onClick={start} type="button">Start</button>
       <button onClick={stop} type="button">Stop</button>
     </div>
