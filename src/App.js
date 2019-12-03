@@ -1,7 +1,7 @@
 import React from 'react';
 import { Player } from 'video-react';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useSpeechRecognition } from "react-speech-kit";
 import { ReactMic } from 'react-mic';
 import { Circle } from 'react-shapes';
@@ -49,7 +49,7 @@ function Intro() {
   const lang = "en-AU";
   const [value, setValue] = useState("");
   const { listen, listening, stop } = useSpeechRecognition({
-
+    
     onResult: result => {
       console.log(result);
       setValue(result);
@@ -205,10 +205,7 @@ function Choose() {
           onChange={event => setValue(event.target.value)}
         /> */}
         {/* <Link to="/Choose">{stress}</Link> */}
-        < div id="button2">
-          <Link to="/Story"><p>Shout</p></Link>
-          <Link to="/FunnyVideo"><p>Video</p></Link>
-        </div>
+       
 
         {listening && <div className="lis">Go ahead I'm listening</div>}
       </div>
@@ -261,13 +258,19 @@ function Story() {
 }
 
 function FunnyVideo() {
+  function vname(){
+    let t = Math.floor(Math.random()*17);
+    console.log("./"+t+".mp4");
+    return "./"+t+".mp4"
+  }
+  vname();
   return (
     <div>
       <div className="player">
         <Player
           playsInline
           poster="/assets/poster.png"
-          src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+          src= "./1.mp4"
         />
       </div>
       <div className="storybutton">
