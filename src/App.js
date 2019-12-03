@@ -1,7 +1,7 @@
 import React from 'react';
 import { Player } from 'video-react';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSpeechRecognition } from "react-speech-kit";
 import { ReactMic } from 'react-mic';
 import { Circle } from 'react-shapes';
@@ -25,7 +25,7 @@ function App() {
       <div className="App">
         <Route exact path="/" component={Intro} />
         <Route exact path="/Choose" component={Choose} />
-        <Route exact path="/Story" component={Story} />
+        <Route exact path="/Shout" component={Story} />
         <Route exact path="/FunnyVideo" component={FunnyVideo} />
       </div>
     </Router>
@@ -35,10 +35,23 @@ function App() {
 
 }
 
+// function Timer(props) {
+//   useEffect(() => {
+//       console.log("HI")
+//       const id = setTimeout(props.onCompletion, 5000);
+//       return () => clearTimeout(id);
+//   }, []);
+
+//   return <div></div>
+// }
+
 function Intro() {
+  const lang = "en-AU";
   const [value, setValue] = useState("");
   const { listen, listening, stop } = useSpeechRecognition({
+
     onResult: result => {
+      console.log(result);
       setValue(result);
       if (result.includes("stressful") || result.includes("stress")) {
         setStress(true);
@@ -49,6 +62,15 @@ function Intro() {
   if (stress) {
     return <Redirect to='/Choose' />
   }
+  const toggle = listening
+    ? stop
+    : () => listen({ lang });
+  // const [route, setRoute] = useState(false)
+  //   if (route) {
+  //       return <Redirect path={route} />
+  //   }
+
+
 
   return (
     <div className="entry">
@@ -58,19 +80,24 @@ function Intro() {
       </div>
 
       <div className="voice">
-        <button onMouseDown={listen} onMouseUp={stop}>
+        {/* <button onMouseDown={listen("en-AU")} onMouseUp={stop}>
           Click to say it out
-      </button>
-        <textarea
-          value={value}
-          onChange={event => setValue(event.target.value)}
-        />
-        <Link to="/Choose">{stress}</Link>
-        < div id="button">
-          {/* <Link to="/Choose"><p>next</p></Link> */}
-        </div>
+      </button> */}
+        <button type="button" onClick={toggle}>
+          {listening ? 'Stop' : 'Listen'}
+        </button>
+
 
         {listening && <div className='lis'>Go ahead I'm listening</div>}
+        {/* <Timer onCompletion={ () => {
+          console.log(stress);
+          if(stress){
+            setRoute("/Choose")
+            console.log("H")
+          }
+          
+        }
+        } /> */}
       </div>
     </div>
   );
@@ -78,19 +105,34 @@ function Intro() {
 
 
 function Choose() {
+  const lang = "en-AU";
   const [value, setValue] = useState("");
+  const [video,setVideo] = useState(false);
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: result => {
+      console.log(result);
       setValue(result);
-      if (result.includes("stressful") || result.includes("stress")) {
-        setStress(true);
+      if (result.includes("worries") || result.includes("worry") || result.includes("out")) {
+        setWorry(true);
+      }
+      if (result.includes("video")) {
+        setVideo(true);
       }
     }
   });
-  const [stress, setStress] = useState(false);
+  const [worry, setWorry] = useState(false);
+  if (worry) {
+    return <Redirect to='/Shout' />
+  }
+  if (video) {
+    return <Redirect to='/FunnyVideo' />
+  }
+
+  const toggle = listening
+    ? stop
+    : () => listen({ lang });
 
   return (
-    // <div className="choosewhole">
 
     <div className="choose">
       <Particles className="par" height="800"
@@ -146,29 +188,22 @@ function Choose() {
           }
         }} />
       <div className="choosetext">
-        <p id="ccintro">Do you wanna</p>
+        <p id="ccintro">Do you wanna : </p>
         {/* particle system   the higher the volume the bigger the ball, finally explodes and disappear*/}
+        <br></br>
         <p id="choice2">Shout out worries</p>
         <p id="choice1">Watch a relaxing video</p>
 
-        {/* <Speech
-          text="If you feel stressful, don't box yourself to the corner.Saying it out could help!"
-          pitch="0.8"
-          rate="1"
-          volume="1"
-          lang="en-GB"
-          voice="Google UK English Female"
-        /> */}
       </div>
 
       <div className="voice2">
-        <button onMouseDown={listen} onMouseUp={stop}>
-          Click to say it out
-      </button>
-        <textarea
+      <button type="button" onClick={toggle}>
+          {listening ? 'Stop' : 'Listen'}
+        </button>
+        {/* <textarea
           value={value}
           onChange={event => setValue(event.target.value)}
-        />
+        /> */}
         {/* <Link to="/Choose">{stress}</Link> */}
         < div id="button2">
           <Link to="/Story"><p>Shout</p></Link>
@@ -196,19 +231,31 @@ function Story() {
   }
 
   function onData(recordedBlob) {
-    console.log('real-time data: ', recordedBlob.size / 20);
-    setRadius(recordedBlob.size / 10);
+    let r = 100;
+    console.log('real-time data: ', recordedBlob.size);
+    if (recordedBlob.size - 900 > 0) {
+      setRadius(r);
+      r += 2;
+    }
+    else {
+      setRadius(100);
+    }
+
   }
   return (
-    <div>
+    <div className="shoutwhole">
+      <div id="shoutbtn">
+        <button onClick={start} type="button">Start</button>
+        <button onClick={stop} type="button">Stop</button>
+      </div>
       <ReactMic
         record={record}
         className="sound-wave"
         onData={onData}
       />
+
       <Circle id="cirrr" r={radius} fill={{ color: 'black' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
-      <button onClick={start} type="button">Start</button>
-      <button onClick={stop} type="button">Stop</button>
+
     </div>
   );
 }
