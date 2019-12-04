@@ -141,3 +141,9 @@
 #tip{
   background-color: white;
 }
+
+.__react_component_tooltip.type-error{
+  background-color: white;
+  color:black;
+  z-index:2;
+}

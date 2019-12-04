@@ -87,14 +87,16 @@ function Intro() {
         {/* <button onMouseDown={listen("en-AU")} onMouseUp={stop}>
           Click to say it out
       </button> */}
-        <p ref={ref => this.fooRef = ref} data-tip='tooltip'>Plzzzz Work : ((((((</p>
-        <button type="button" onClick={toggle} onMouseOver={ReactTooltip.show(this.fooRef)}>
+        {/* <p ref={ref => this.fooRef = ref} data-tip='tooltip'>Plzzzz Work : ((((((</p> */}
+        <a className="tip" data-tip data-for='btn'><button id="btn" type="button" onClick={toggle}>
           {listening ? 'Stop' : 'Listen'}
-        </button>
-        <ReactTooltip />
-        
+        </button></a>
+        <ReactTooltip id='btn' type='error'>
+          <span>Hint: "I feel so stressful"</span>
+        </ReactTooltip>
+
         {listening && <div className='lis'>Go ahead I'm listening</div>}
-        
+
       </div>
     </div>
   );
@@ -315,7 +317,7 @@ function MyPlayer(props) {
   return <Player
     playsInline
     poster="/assets/poster.png"
-    src = {props.vn}
+    src={props.vn}
   />
 
 }
