@@ -84,12 +84,8 @@ function Intro() {
       </div>
 
       <div className="voice">
-        {/* <button onMouseDown={listen("en-AU")} onMouseUp={stop}>
-          Click to say it out
-      </button> */}
-        {/* <p ref={ref => this.fooRef = ref} data-tip='tooltip'>Plzzzz Work : ((((((</p> */}
         <a className="tip" data-tip data-for='btn'><button id="btn" type="button" onClick={toggle}>
-          {listening ? 'Stop' : 'Listen'}
+          {listening ? 'Stop' : 'Click to say it out'}
         </button></a>
         <ReactTooltip id='btn' type='error'>
           <span>Hint: "I feel so stressful"</span>
@@ -111,7 +107,7 @@ function Choose() {
     onResult: result => {
       console.log(result);
       setValue(result);
-      if (result.includes("worries") || result.includes("worry") || result.includes("out")) {
+      if (result.includes("game")) {
         setWorry(true);
       }
       if (result.includes("video")) {
@@ -206,7 +202,7 @@ function Choose() {
         <p id="ccintro">Do you wanna : </p>
         {/* particle system   the higher the volume the bigger the ball, finally explodes and disappear*/}
         <br></br>
-        <p id="choice2">Shout out worries</p>
+        <p id="choice2">Play a game</p>
         <p id="choice1">Watch a relaxing video</p>
 
       </div>
@@ -232,39 +228,62 @@ function Choose() {
 }
 
 function Story() {
-  const [record, setRecord] = useState(false);
-  const [radius, setRadius] = useState('');
-  function start() {
-    setRecord(true);
+  const [radius, setRadius] = useState(10);
+  // const [num,setNum] = useState(0);
+  // const [record, setRecord] = useState(false);
+  // function start() {
+  //   setRecord(true);
+  // }
+
+  // function stop() {
+  //   setRecord(false);
+  // }
+
+  // function onData(recordedBlob) {
+  //   let r = 100;
+  //   console.log('real-time data: ', recordedBlob.size);
+  //   if (recordedBlob.size - 900 > 0) {
+  //     setRadius(r);
+  //     r += 2;
+  //   }
+  //   else {
+  //     setRadius(100);
+  //   }
+
+  // }
+//  let count = 0;
+  let timePrev = 0;
+  let timeCurr = 0;
+  let interval = 0;
+  function countKeyPressed(){ 
+    //count += 1;
+    timeCurr = Date.now();
+    interval = timeCurr - timePrev;
+
+
+    console.log( interval );
+
+
+    timePrev = timeCurr;
+    //return freq;
   }
 
-  function stop() {
-    setRecord(false);
-  }
 
-  function onData(recordedBlob) {
-    let r = 100;
-    console.log('real-time data: ', recordedBlob.size);
-    if (recordedBlob.size - 900 > 0) {
-      setRadius(r);
-      r += 2;
-    }
-    else {
-      setRadius(100);
-    }
 
-  }
+  // countKeyPressed();
+
+
   return (
     <div className="shoutwhole">
       <div id="shoutbtn">
-        <button onClick={start} type="button">Start</button>
-        <button onClick={stop} type="button">Stop</button>
+        <button onKeyDown={countKeyPressed} type="button">Start</button>
+        <button type="button">Stop</button>
       </div>
-      <ReactMic
+      {/* <ReactMic
         record={record}
         className="sound-wave"
         onData={onData}
-      />
+      /> */}
 
       <Circle id="cirrr" r={radius} fill={{ color: 'black' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
 
