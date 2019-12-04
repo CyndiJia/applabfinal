@@ -17,6 +17,7 @@
     "react-speech": "^1.0.2",
     "react-speech-kit": "^2.0.2",
     "react-speech-recognition": "^2.0.4",
+    "react-tooltip": "^3.11.1",
     "redux": "^4.0.4",
     "video-react": "^0.14.1",
     "yarn": "^1.19.2"

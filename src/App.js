@@ -1,18 +1,18 @@
 import React from 'react';
 import { Player } from 'video-react';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
-import { useState} from "react";
+import { useState } from "react";
 import { useSpeechRecognition } from "react-speech-kit";
 import { ReactMic } from 'react-mic';
 import { Circle } from 'react-shapes';
 import ParticleAnimation from 'react-particle-animation';
 import Particles from 'react-particles-js';
+import ReactTooltip from 'react-tooltip'
 
 // import "node_modules/video-react/dist/video-react.css"; 
 //import logo from './logo.svg';
 
 import './App.scss';
-import Dictaphone from './dictaphone.js'
 
 
 
@@ -49,7 +49,7 @@ function Intro() {
   const lang = "en-AU";
   const [value, setValue] = useState("");
   const { listen, listening, stop } = useSpeechRecognition({
-    
+
     onResult: result => {
       console.log(result);
       setValue(result);
@@ -60,6 +60,10 @@ function Intro() {
   });
   const [stress, setStress] = useState(false);
   if (stress) {
+
+    if (listening) {
+      stop();
+    }
     return <Redirect to='/Choose' />
   }
   const toggle = listening
@@ -83,21 +87,14 @@ function Intro() {
         {/* <button onMouseDown={listen("en-AU")} onMouseUp={stop}>
           Click to say it out
       </button> */}
-        <button type="button" onClick={toggle}>
+        <p ref={ref => this.fooRef = ref} data-tip='tooltip'>Plzzzz Work : ((((((</p>
+        <button type="button" onClick={toggle} onMouseOver={ReactTooltip.show(this.fooRef)}>
           {listening ? 'Stop' : 'Listen'}
         </button>
-
-
+        <ReactTooltip />
+        
         {listening && <div className='lis'>Go ahead I'm listening</div>}
-        {/* <Timer onCompletion={ () => {
-          console.log(stress);
-          if(stress){
-            setRoute("/Choose")
-            console.log("H")
-          }
-          
-        }
-        } /> */}
+        
       </div>
     </div>
   );
@@ -107,7 +104,7 @@ function Intro() {
 function Choose() {
   const lang = "en-AU";
   const [value, setValue] = useState("");
-  const [video,setVideo] = useState(false);
+  const [video, setVideo] = useState(false);
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: result => {
       console.log(result);
@@ -122,15 +119,31 @@ function Choose() {
   });
   const [worry, setWorry] = useState(false);
   if (worry) {
+    if (listening) {
+      stop();
+    }
     return <Redirect to='/Shout' />
   }
+
   if (video) {
+    if (listening) {
+      stop();
+    }
     return <Redirect to='/FunnyVideo' />
   }
 
-  const toggle = listening
-    ? stop
-    : () => listen({ lang });
+  // const toggle = listening
+  //   ? stop
+  //   : () => listen({ lang });
+
+  const toggle = () => {
+    if (listening) {
+      stop();
+    } else {
+      listen({ lang });
+    }
+  }
+
 
   return (
 
@@ -197,7 +210,7 @@ function Choose() {
       </div>
 
       <div className="voice2">
-      <button type="button" onClick={toggle}>
+        <button type="button" onClick={toggle}>
           {listening ? 'Stop' : 'Listen'}
         </button>
         {/* <textarea
@@ -205,7 +218,7 @@ function Choose() {
           onChange={event => setValue(event.target.value)}
         /> */}
         {/* <Link to="/Choose">{stress}</Link> */}
-       
+
 
         {listening && <div className="lis">Go ahead I'm listening</div>}
       </div>
@@ -257,28 +270,53 @@ function Story() {
   );
 }
 
+function getRV() {
+  let t = Math.floor(Math.random() * 17);
+  let n = "./" + t + ".mp4";
+  return n;
+}
+
 function FunnyVideo() {
-  function vname(){
-    let t = Math.floor(Math.random()*17);
-    console.log("./"+t+".mp4");
-    return "./"+t+".mp4"
+  const [v, setV] = useState(getRV);
+  function vname() {
+    let t = Math.floor(Math.random() * 17);
+    let n = "./" + t + ".mp4";
+    setV(n);
+    console.log("./" + t + ".mp4");
+    // return "./"+t+".mp4"
   }
-  vname();
+  // vname();
+
+  function handleButtonClicked() {
+    return setV(getRV());
+  }
   return (
     <div>
       <div className="player">
-        <Player
-          playsInline
-          poster="/assets/poster.png"
-          src= "./1.mp4"
+        <MyPlayer vn={v}
+        // playsInline
+        // poster="/assets/poster.png"
+        // src= {v}
         />
       </div>
       <div className="storybutton">
+        <button onClick={handleButtonClicked}>Switch</button>
         <Link to="/"><p>Back</p></Link>
       </div>
 
+
     </div>
   );
+
+}
+
+function MyPlayer(props) {
+  console.log(props);
+  return <Player
+    playsInline
+    poster="/assets/poster.png"
+    src = {props.vn}
+  />
 
 }
 
