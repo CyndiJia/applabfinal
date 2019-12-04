@@ -5,9 +5,10 @@ import { useState } from "react";
 import { useSpeechRecognition } from "react-speech-kit";
 import { ReactMic } from 'react-mic';
 import { Circle } from 'react-shapes';
-import ParticleAnimation from 'react-particle-animation';
 import Particles from 'react-particles-js';
 import ReactTooltip from 'react-tooltip'
+import Sketch from './Sketch'
+import * as sketch2 from './sketch2';
 
 // import "node_modules/video-react/dist/video-react.css"; 
 //import logo from './logo.svg';
@@ -228,7 +229,7 @@ function Choose() {
 }
 
 function Story() {
-  const [radius, setRadius] = useState(10);
+  const [radius, setRadius] = useState('');
   // const [num,setNum] = useState(0);
   // const [record, setRecord] = useState(false);
   // function start() {
@@ -255,6 +256,7 @@ function Story() {
   let timePrev = 0;
   let timeCurr = 0;
   let interval = 0;
+  let r;
   function countKeyPressed(){ 
     //count += 1;
     timeCurr = Date.now();
@@ -263,8 +265,31 @@ function Story() {
 
     console.log( interval );
 
-
     timePrev = timeCurr;
+    if(interval<100){
+      setRadius(200);
+    }
+    else if(interval<300){
+      setRadius(150);
+    }
+    else if(interval<500){
+      setRadius(80);
+    }
+    else if(interval < 700){
+      setRadius(40);
+    }
+    else if(interval < 1000){
+      setRadius(20);
+    }
+    else if(interval < 1300){
+      setRadius(30);
+    }
+    else if(interval < 1600){
+      setRadius(20);
+    }
+    else if(interval < 10000000){
+      setRadius(30);
+    }
     //return freq;
   }
 
@@ -285,7 +310,11 @@ function Story() {
         onData={onData}
       /> */}
 
+      <div className="circle">
+      <Sketch sketch={sketch2} />
       <Circle id="cirrr" r={radius} fill={{ color: 'black' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
+      </div>
+      
 
     </div>
   );
@@ -299,14 +328,7 @@ function getRV() {
 
 function FunnyVideo() {
   const [v, setV] = useState(getRV);
-  function vname() {
-    let t = Math.floor(Math.random() * 17);
-    let n = "./" + t + ".mp4";
-    setV(n);
-    console.log("./" + t + ".mp4");
-    // return "./"+t+".mp4"
-  }
-  // vname();
+
 
   function handleButtonClicked() {
     return setV(getRV());
