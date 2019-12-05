@@ -301,8 +301,8 @@ function Story() {
   return (
     <div className="shoutwhole">
       <div id="shoutbtn">
-        <button onKeyDown={countKeyPressed} type="button">Start</button>
-        <button type="button">Stop</button>
+        {/* <textarea onKeyDown={countKeyPressed} >Start</textarea> */}
+        {/* <button type="button">Stop</button> */}
       </div>
       {/* <ReactMic
         record={record}
@@ -311,7 +311,9 @@ function Story() {
       /> */}
 
       <div className="circle">
-      <Sketch sketch={sketch2} />
+      <Sketch sketch={sketch2} width={window.innerWidth} height={window.innerHeight} />
+      {/* <Sketch  /> */}
+
       <Circle id="cirrr" r={radius} fill={{ color: 'black' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
       </div>
       
