@@ -32,19 +32,8 @@ function App() {
     </Router>
   );
 
-
-
 }
 
-// function Timer(props) {
-//   useEffect(() => {
-//       console.log("HI")
-//       const id = setTimeout(props.onCompletion, 5000);
-//       return () => clearTimeout(id);
-//   }, []);
-
-//   return <div></div>
-// }
 
 function Intro() {
   const lang = "en-AU";
@@ -210,7 +199,7 @@ function Choose() {
 
       <div className="voice2">
         <button type="button" onClick={toggle}>
-          {listening ? 'Stop' : 'Listen'}
+          {listening ? 'Stop' : 'Click to speak out your choice : )'}
         </button>
         {/* <textarea
           value={value}
@@ -230,73 +219,7 @@ function Choose() {
 
 function Story() {
   const [radius, setRadius] = useState('');
-  // const [num,setNum] = useState(0);
-  // const [record, setRecord] = useState(false);
-  // function start() {
-  //   setRecord(true);
-  // }
-
-  // function stop() {
-  //   setRecord(false);
-  // }
-
-  // function onData(recordedBlob) {
-  //   let r = 100;
-  //   console.log('real-time data: ', recordedBlob.size);
-  //   if (recordedBlob.size - 900 > 0) {
-  //     setRadius(r);
-  //     r += 2;
-  //   }
-  //   else {
-  //     setRadius(100);
-  //   }
-
-  // }
-//  let count = 0;
-  let timePrev = 0;
-  let timeCurr = 0;
-  let interval = 0;
-  let r;
-  function countKeyPressed(){ 
-    //count += 1;
-    timeCurr = Date.now();
-    interval = timeCurr - timePrev;
-
-
-    console.log( interval );
-
-    timePrev = timeCurr;
-    if(interval<100){
-      setRadius(200);
-    }
-    else if(interval<300){
-      setRadius(150);
-    }
-    else if(interval<500){
-      setRadius(80);
-    }
-    else if(interval < 700){
-      setRadius(40);
-    }
-    else if(interval < 1000){
-      setRadius(20);
-    }
-    else if(interval < 1300){
-      setRadius(30);
-    }
-    else if(interval < 1600){
-      setRadius(20);
-    }
-    else if(interval < 10000000){
-      setRadius(30);
-    }
-    //return freq;
-  }
-
-
-
-  // countKeyPressed();
-
+  
 
   return (
     <div className="shoutwhole">
@@ -304,17 +227,9 @@ function Story() {
         {/* <textarea onKeyDown={countKeyPressed} >Start</textarea> */}
         {/* <button type="button">Stop</button> */}
       </div>
-      {/* <ReactMic
-        record={record}
-        className="sound-wave"
-        onData={onData}
-      /> */}
-
       <div className="circle">
       <Sketch sketch={sketch2} width={window.innerWidth} height={window.innerHeight} />
-      {/* <Sketch  /> */}
 
-      <Circle id="cirrr" r={radius} fill={{ color: 'black' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
       </div>
       
 
@@ -323,7 +238,7 @@ function Story() {
 }
 
 function getRV() {
-  let t = Math.floor(Math.random() * 17);
+  let t = Math.floor(Math.random() * 12);
   let n = "./" + t + ".mp4";
   return n;
 }
@@ -335,18 +250,15 @@ function FunnyVideo() {
   function handleButtonClicked() {
     return setV(getRV());
   }
+
   return (
-    <div>
+    <div className="vvv">
       <div className="player">
-        <MyPlayer vn={v}
-        // playsInline
-        // poster="/assets/poster.png"
-        // src= {v}
-        />
+        <MyPlayer vn={v}/>
       </div>
       <div className="storybutton">
-        <button onClick={handleButtonClicked}>Switch</button>
-        <Link to="/"><p>Back</p></Link>
+        <button id = "switch" onClick={handleButtonClicked}>Switch</button>
+        <Link to="/"><button id="home">Home</button></Link>
       </div>
 
 

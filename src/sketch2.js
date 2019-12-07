@@ -4,17 +4,27 @@ import { Circle } from 'react-shapes';
 let timePrev = 0;
 let timeCurr = 0;
 let interval = 0;
+let value = 20;
+let MAX_AGE = 5000;
+let times = [];
 
 // const [r,setr]=useState(" ");
 
 
-function KeyPressed(){ 
+export function keyPressed(){ 
+    times = [...times, new Date()];
     //count += 1;
-    timeCurr = Date.now();
-    interval = timeCurr - timePrev;
-    console.log( interval );
+    // timeCurr = Date.now();
+    // interval = timeCurr - timePrev;
+    
 
-    timePrev = timeCurr;
+    // timePrev = timeCurr;
+    // if(interval>10000000){
+    //     interval = 200;
+    // }
+    // value = p.map(interval, 0,2000,300,20);
+    // console.log( "inter: "+interval+" "+"val: "+value );
+
     // if(interval>100000000){
     //     inverval = 300;
     // }
@@ -38,8 +48,6 @@ function moveParticle([x, y, dx, dy]) {
     dy *= b;
     x += dx;
     y += dy;
-    // x = (x + p.width) % p.width;
-    // y = (y + p.height) % p.height;
     return [x, y, dx, dy];
 }
 
@@ -76,11 +84,28 @@ function bounceParticles() {
 
 export function draw() {
     p.background(40);
-    particles.forEach(bounceParticles);
-    particles = particles.map(moveParticle);
-    particles.forEach(drawParticle);
     p.fill(255,0,0);
-    p.circle(window.innerWidth/2, window.innerHeight/2, 80,60);
+    p.background(220)
+    let now = new Date()
+    times = times.filter(function(t){return t>now-MAX_AGE});
+    let sum = times
+                .map(function(t){return t-now+MAX_AGE})
+                .map(n => n  / MAX_AGE)
+                .map(n => n**2)
+                .reduce((a, b) => a + b, 0)
+    let radius = p.map(sum, 0,10, 10, 200);
+    console.log(radius);
+    p.fill(255,0,0);
+    p.circle(window.innerWidth / 2, window.innerHeight / 2, radius)
+    if(radius>500){
+        
+        particles.forEach(bounceParticles);
+        particles = particles.map(moveParticle);
+        particles.forEach(drawParticle);
+        
+    }
+   
+   
 }
 
 
