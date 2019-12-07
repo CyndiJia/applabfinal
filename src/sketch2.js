@@ -1,4 +1,4 @@
-import { p } from './Sketch'
+import { p } from './Sketch';
 // import { Circle } from 'react-shapes';
 
 // let timePrev = 0;
@@ -84,19 +84,15 @@ function bounceParticles() {
 }
 
 export function setup() {
-    let button = p.createButton("reset");
     explosion = p.loadSound('./exp2.wav');
-    button.mousePressed(restart);
   }
 
-export function restart(){
-    window.location.reload(true);
-}
+
 
 export function explode(){
     p.noStroke();
     p.fill(0);
-    p.circle(window.innerWidth / 2, window.innerHeight / 2, 1500);      
+    p.circle(window.innerWidth / 2, window.innerHeight / 2-60, 1500);      
     particles.forEach(bounceParticles);
     particles = particles.map(moveParticle);
     particles.forEach(drawParticle);
@@ -122,9 +118,9 @@ export function draw() {
     p.fill(p.random(255),p.random(255),p.random(255));
     p.noStroke();
     p.circle(window.innerWidth / 2, window.innerHeight / 2, radius)
-    if(radius>400){
+    if(radius>350){
         exxx = true;
-        // explosion.play();    
+        explosion.play();    
     }
 
     if(exxx){

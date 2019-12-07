@@ -25,7 +25,7 @@ function App() {
       <div className="App">
         <Route exact path="/" component={Intro} />
         <Route exact path="/Choose" component={Choose} />
-        <Route exact path="/Shout" component={Story} />
+        <Route exact path="/Shout" component={Explode} />
         <Route exact path="/FunnyVideo" component={FunnyVideo} />
       </div>
     </Router>
@@ -212,9 +212,11 @@ function Choose() {
   );
 }
 
-function Story() {
-  const [radius, setRadius] = useState('');
-  
+function Explode() {
+  // const [radius, setRadius] = useState('');
+  function restart(){
+    window.location.reload(true);
+  }
 
   return (
     <div className="shoutwhole">
@@ -223,9 +225,13 @@ function Story() {
         {/* <button type="button">Stop</button> */}
       </div>
       <div className="circle">
-      <Sketch sketch={sketch2} width={window.innerWidth} height={window.innerHeight} />
-
+        <Sketch sketch={sketch2} width={window.innerWidth} height={window.innerHeight-50} />      
       </div>
+      <div id="vbt">
+        <button id="home1" onClick={restart}>restart</button>
+        <Link to="/"><button id="home1">Home</button></Link>
+        <Link to="/FunnyVideo"><button id="video">Switch to Videos</button></Link>
+      </div> 
       
 
     </div>
