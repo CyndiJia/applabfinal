@@ -225,7 +225,7 @@ function Explode() {
         {/* <button type="button">Stop</button> */}
       </div>
       <div className="circle">
-        <Sketch sketch={sketch2} width={window.innerWidth} height={window.innerHeight-50} />      
+        <Sketch sketch={sketch2} width={window.innerWidth} height={window.innerHeight-52} />      
       </div>
       <div id="vbt">
         <button id="home1" onClick={restart}>restart</button>

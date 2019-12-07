@@ -85,6 +85,11 @@ function bounceParticles() {
 
 export function setup() {
     explosion = p.loadSound('./exp2.wav');
+    let s = 'Keep pressing the keys to kill your stress';
+    p.textSize(32)
+    p.fill(255);
+    p.text(s, 100, 100);
+    p.background(0);
   }
 
 
@@ -100,12 +105,7 @@ export function explode(){
 
 
 export function draw() {
-    let s = 'Keep pressing the keys to kill your stress';
-    p.textSize(32)
-    p.fill(255);
-    p.text(s, 100, 100);
-    p.background(0);
-    // p.background(220)
+
     let now = new Date()
     times = times.filter(function(t){return t>now-MAX_AGE});
     let sum = times
@@ -117,15 +117,14 @@ export function draw() {
     // console.log(radius);
     p.fill(p.random(255),p.random(255),p.random(255));
     p.noStroke();
-    p.circle(window.innerWidth / 2, window.innerHeight / 2, radius)
+    p.circle(window.innerWidth / 2, window.innerHeight / 2, radius);
     if(radius>350){
         exxx = true;
         explosion.play();    
     }
 
     if(exxx){
-        explode();
-        
+        explode();    
     }
    
    
