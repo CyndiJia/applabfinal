@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import * as P5 from 'p5';
 import "p5/lib/addons/p5.sound";
+import "p5/lib/addons/p5.dom";
+// import 'script-loader!p5/lib/addons/p5.dom.min.js'
 
 const P5_SENTINEL = {
     error: "p5 used outside the dynamic scope of an exported function."

@@ -8,6 +8,8 @@ import { p } from './Sketch'
 let MAX_AGE = 5000;
 let times = [];
 let explosion;
+let exxx;
+// let restart = false;
 
 
 
@@ -52,7 +54,7 @@ function moveParticle([x, y, dx, dy]) {
 
 function drawParticle([x, y]) {
     p.noStroke();
-    p.fill(255,0,0);
+    p.fill(p.random(255),p.random(255),p.random(255));
     p.circle(x, y, 20, 20);
 }
 
@@ -82,18 +84,31 @@ function bounceParticles() {
 }
 
 export function setup() {
+    let button = p.createButton("reset");
+    explosion = p.loadSound('./exp2.wav');
+    button.mousePressed(restart);
+  }
+
+export function restart(){
+    window.location.reload(true);
+}
+
+export function explode(){
+    p.noStroke();
+    p.fill(0);
+    p.circle(window.innerWidth / 2, window.innerHeight / 2, 1500);      
+    particles.forEach(bounceParticles);
+    particles = particles.map(moveParticle);
+    particles.forEach(drawParticle);
+}
+
+
+export function draw() {
     let s = 'Keep pressing the keys to kill your stress';
     p.textSize(32)
     p.fill(255);
     p.text(s, 100, 100);
-    explosion = p.loadSound('./exp2.wav');
-  }
-
-
-export function draw() {
-    
     p.background(0);
-    p.fill(255,0,0);
     // p.background(220)
     let now = new Date()
     times = times.filter(function(t){return t>now-MAX_AGE});
@@ -103,17 +118,17 @@ export function draw() {
                 .map(n => n**2)
                 .reduce((a, b) => a + b, 0)
     let radius = p.map(sum, 0,10, 10, 200);
-    console.log(radius);
-    p.fill(255,0,0);
+    // console.log(radius);
+    p.fill(p.random(255),p.random(255),p.random(255));
     p.noStroke();
     p.circle(window.innerWidth / 2, window.innerHeight / 2, radius)
     if(radius>400){
-        p.fill(255);
-        p.circle(window.innerWidth / 2, window.innerHeight / 2, 1500); 
-        explosion.play();    
-        particles.forEach(bounceParticles);
-        particles = particles.map(moveParticle);
-        particles.forEach(drawParticle);
+        exxx = true;
+        // explosion.play();    
+    }
+
+    if(exxx){
+        explode();
         
     }
    

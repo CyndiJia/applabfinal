@@ -68,7 +68,7 @@ function Intro() {
   return (
     <div className="entry">
       <div className="text">
-        <p id="intro">If you feel stressful, don't box yourself to the corner : )</p>
+        <p id="intro">If you feel stressed, don't box yourself to the corner : )</p>
         <p id="intro2">Saying it out could help!</p>
       </div>
 
@@ -77,7 +77,7 @@ function Intro() {
           {listening ? 'Stop' : 'Click to say it out'}
         </button></a>
         <ReactTooltip id='btn' type='error'>
-          <span>Hint: "I feel so stressful"</span>
+          <span>Hint: "I feel so stressed"</span>
         </ReactTooltip>
 
         {listening && <div className='lis'>Go ahead I'm listening</div>}
