@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom
 import { useState } from "react";
 import { useSpeechRecognition } from "react-speech-kit";
 import { ReactMic } from 'react-mic';
-import { Circle } from 'react-shapes';
 import Particles from 'react-particles-js';
 import ReactTooltip from 'react-tooltip'
 import Sketch from './Sketch'
@@ -201,11 +200,7 @@ function Choose() {
         <button type="button" onClick={toggle}>
           {listening ? 'Stop' : 'Click to speak out your choice : )'}
         </button>
-        {/* <textarea
-          value={value}
-          onChange={event => setValue(event.target.value)}
-        /> */}
-        {/* <Link to="/Choose">{stress}</Link> */}
+
 
 
         {listening && <div className="lis">Go ahead I'm listening</div>}
@@ -257,8 +252,9 @@ function FunnyVideo() {
         <MyPlayer vn={v}/>
       </div>
       <div className="storybutton">
-        <button id = "switch" onClick={handleButtonClicked}>Switch</button>
+        <button id = "switch" onClick={handleButtonClicked}>Switch Videos</button>
         <Link to="/"><button id="home">Home</button></Link>
+        <Link to="/Shout"><button id="game">Switch to the Game</button></Link>
       </div>
 
 

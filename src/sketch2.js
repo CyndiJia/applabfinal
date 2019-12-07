@@ -8,7 +8,7 @@ import { p } from './Sketch'
 let MAX_AGE = 5000;
 let times = [];
 let explosion;
-let s = 'Keep pressing the keys to kill your stress';
+
 
 
 // const [r,setr]=useState(" ");
@@ -82,6 +82,7 @@ function bounceParticles() {
 }
 
 export function setup() {
+    let s = 'Keep pressing the keys to kill your stress';
     p.textSize(32)
     p.fill(255);
     p.text(s, 100, 100);
@@ -106,7 +107,7 @@ export function draw() {
     p.fill(255,0,0);
     p.noStroke();
     p.circle(window.innerWidth / 2, window.innerHeight / 2, radius)
-    if(radius>500){
+    if(radius>400){
         p.fill(255);
         p.circle(window.innerWidth / 2, window.innerHeight / 2, 1500); 
         explosion.play();    
