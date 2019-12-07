@@ -1,12 +1,15 @@
 import { p } from './Sketch'
-import { Circle } from 'react-shapes';
+// import { Circle } from 'react-shapes';
 
-let timePrev = 0;
-let timeCurr = 0;
-let interval = 0;
-let value = 20;
+// let timePrev = 0;
+// let timeCurr = 0;
+// let interval = 0;
+// let value = 20;
 let MAX_AGE = 5000;
 let times = [];
+let explosion;
+let s = 'Keep pressing the keys to kill your stress';
+
 
 // const [r,setr]=useState(" ");
 
@@ -31,15 +34,11 @@ export function keyPressed(){
 }
 
 
-    
-    
-
 let particles = Array(100).fill().map(makeParticle);
 
 
 function makeParticle() {
-    // return [Math.random() - 0.5, Math.random() - 0.5, 0, 0];
-    return [window.innerWidth/2, window.innerHeight/2, 10*Math.random(), 10*Math.random()];
+    return [window.innerWidth/2, window.innerHeight/2, 20*Math.random(), 20*Math.random()];
 }
 
 function moveParticle([x, y, dx, dy]) {
@@ -52,7 +51,8 @@ function moveParticle([x, y, dx, dy]) {
 }
 
 function drawParticle([x, y]) {
-    p.fill('white')
+    p.noStroke();
+    p.fill(255,0,0);
     p.circle(x, y, 20, 20);
 }
 
@@ -81,11 +81,19 @@ function bounceParticles() {
             p1 !== p2 && repel(p1, p2)))
 }
 
+export function setup() {
+    p.textSize(32)
+    p.fill(255);
+    p.text(s, 100, 100);
+    explosion = p.loadSound('./exp2.wav');
+  }
+
 
 export function draw() {
-    p.background(40);
+    
+    p.background(0);
     p.fill(255,0,0);
-    p.background(220)
+    // p.background(220)
     let now = new Date()
     times = times.filter(function(t){return t>now-MAX_AGE});
     let sum = times
@@ -96,9 +104,12 @@ export function draw() {
     let radius = p.map(sum, 0,10, 10, 200);
     console.log(radius);
     p.fill(255,0,0);
+    p.noStroke();
     p.circle(window.innerWidth / 2, window.innerHeight / 2, radius)
     if(radius>500){
-        
+        p.fill(255);
+        p.circle(window.innerWidth / 2, window.innerHeight / 2, 1500); 
+        explosion.play();    
         particles.forEach(bounceParticles);
         particles = particles.map(moveParticle);
         particles.forEach(drawParticle);
