@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as P5 from 'p5';
 import "p5/lib/addons/p5.sound";
-import "p5/lib/addons/p5.dom";
+// import "p5/lib/addons/p5.dom";
 // import 'script-loader!p5/lib/addons/p5.dom.min.js'
 
 const P5_SENTINEL = {
@@ -45,5 +45,5 @@ export default function Sketch(props) {
     if (!canvas) {
         return <div>Creating canvas…</div>
     }
-    return <div ref={ref => canvas.parent(ref)}></div>
+    return <div ref={ref => ref && canvas.parent(ref)} />;
 }
