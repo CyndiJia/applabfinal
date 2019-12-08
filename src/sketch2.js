@@ -89,7 +89,7 @@ export function setup() {
     p.textSize(32)
     p.fill(255);
     p.text(s, 100, 100);
-    p.background(0);
+    p.background(0); 
   }
 
 
@@ -105,7 +105,7 @@ export function explode(){
 
 
 export function draw() {
-
+    p.clear();
     let now = new Date()
     times = times.filter(function(t){return t>now-MAX_AGE});
     let sum = times
