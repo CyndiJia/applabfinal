@@ -57,10 +57,7 @@ function Intro() {
   const toggle = listening
     ? stop
     : () => listen({ lang });
-  // const [route, setRoute] = useState(false)
-  //   if (route) {
-  //       return <Redirect path={route} />
-  //   }
+
 
 
 
