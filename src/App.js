@@ -3,16 +3,15 @@ import { Player } from 'video-react';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import { useState } from "react";
 import { useSpeechRecognition } from "react-speech-kit";
-import { ReactMic } from 'react-mic';
 import Particles from 'react-particles-js';
 import ReactTooltip from 'react-tooltip'
 import Sketch from './Sketch'
 import * as sketch2 from './sketch2';
-
-// import "node_modules/video-react/dist/video-react.css"; 
-//import logo from './logo.svg';
-
 import './App.scss';
+//source: video-react: https://video-react.js.org/
+//source: react-speech-kit: https://github.com/MikeyParton/react-speech-kit
+//source: react-particles-js: https://www.npmjs.com/package/react-particles-js?activeTab=readme
+//source: react-tooltip: https://www.npmjs.com/package/react-tooltip
 
 
 
