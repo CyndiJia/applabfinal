@@ -67,7 +67,7 @@ function Intro() {
   return (
     <div className="entry">
       <div className="text">
-        <p id="intro">If you feel stressed, don't box yourself to the corner : )</p>
+        <p id="intro">If you feel stressed, don't box yourself into a corner : )</p>
         <p id="intro2">Saying it out could help!</p>
       </div>
 
