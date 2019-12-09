@@ -212,10 +212,19 @@ function Choose() {
   );
 }
 
+
+
+
 function Explode() {
+  const [explodeText,setEx] = useState(false);
   // const [radius, setRadius] = useState('');
   function restart(){
     window.location.reload(true);
+  }
+  //this function just changes your text state 
+  function explodeT() {
+    setEx(true);
+    return <p>hihihihihihihi</p>
   }
 
   return (
@@ -225,7 +234,7 @@ function Explode() {
         {/* <button type="button">Stop</button> */}
       </div>
       <div className="circle">
-        <Sketch sketch={sketch2} width={window.innerWidth} height={window.innerHeight-52} />      
+        <Sketch style={{ position:'absolute'}} changeText={explodeT} sketch={sketch2} width={window.innerWidth} height={window.innerHeight-52} />      
       </div>
       <div id="vbt">
         <button id="home1" onClick={restart}>restart</button>

@@ -8,7 +8,12 @@ import { p } from './Sketch';
 let MAX_AGE = 5000;
 let times = [];
 let explosion;
-let exxx;
+let explodeText;
+let fontRegular;
+let wh = 10;
+let wl = ["Everything is gonna be okay!","You will survive!","You got this!","Believe in yourself!"
+,"You are the strongest person in the world!","Only two days to winter break!!","Don't give up!"]
+let num = Math.floor(6*Math.random());
 // let restart = false;
 
 
@@ -85,19 +90,26 @@ function bounceParticles() {
 
 export function setup() {
     explosion = p.loadSound('./exp2.wav');
-    let s = 'Keep pressing the keys to kill your stress';
-    p.textSize(32)
-    p.fill(255);
-    p.text(s, 100, 100);
-    p.background(0); 
+    fontRegular = p.loadFont('./Philosopher-Regular.ttf');
+   
   }
 
 
 
 export function explode(){
+    let s = wl[num];
+
+    // p.background(0); 
     p.noStroke();
     p.fill(0);
     p.circle(window.innerWidth / 2, window.innerHeight / 2-60, 1500);      
+
+    
+    p.textSize(32);
+    p.textFont(fontRegular);
+    p.fill(255);
+    p.text(s, 430, wh);
+
     particles.forEach(bounceParticles);
     particles = particles.map(moveParticle);
     particles.forEach(drawParticle);
@@ -105,7 +117,16 @@ export function explode(){
 
 
 export function draw() {
+    if(wh<p.height/2){
+        wh+=2;
+    }
+  
     p.clear();
+    let i = 'Keep pressing the keys to kill your stress';
+    p.textSize(32);
+    p.textFont(fontRegular);
+    p.fill(255);
+    p.text(i, 340, 100);
     let now = new Date()
     times = times.filter(function(t){return t>now-MAX_AGE});
     let sum = times
@@ -119,11 +140,11 @@ export function draw() {
     p.noStroke();
     p.circle(window.innerWidth / 2, window.innerHeight / 2, radius);
     if(radius>350){
-        exxx = true;
+        explodeText = true;
         explosion.play();    
     }
 
-    if(exxx){
+    if(explodeText){
         explode();    
     }
    
